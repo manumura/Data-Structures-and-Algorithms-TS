@@ -1,6 +1,6 @@
-import BST from '../../Data-Structures/Trees/BinarySearchTree.ts';
-import Node from '../../Data-Structures/Trees/BinaryTreeNode.ts';
-import Queue from '../../Data-Structures/Sequential/Queue.ts';
+import BST from '../../Data-Structures/Trees/BinarySearchTree';
+import Node from '../../Data-Structures/Trees/BinaryTreeNode';
+import Queue from '../../Data-Structures/Sequential/Queue';
 
 function recursiveBFT(nodeQueue: Queue<Node>, nodesTraversed: Array<number>): Array<number> {
   if (nodeQueue.getLength() === 0) return nodesTraversed;
@@ -30,7 +30,8 @@ function breadthFirstTraversal(tree: BST) {
 //---------------------------------------------------------------------
 // ----------                 MAIN PROGRAM                   ----------
 //---------------------------------------------------------------------
-if (import.meta.main) {
+// if (import.meta.main) {
+function main() {
 
   const tree = new BST();
 
@@ -50,6 +51,8 @@ if (import.meta.main) {
 
   // RUN:   deno run Algorithms/Searching/BreadthFirstTraversal.ts
 }
+
+main();
 
 // --------------------------- Terminal Output: ---------------------------
 // [

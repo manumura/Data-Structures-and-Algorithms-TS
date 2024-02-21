@@ -1,5 +1,4 @@
-import Node from '../Linked-Lists/SinglyNode.ts';
-
+import Node from '../Linked-Lists/SinglyNode';
 
 export default class Queue<T> {
   private last: Node<T> | null;
@@ -71,8 +70,8 @@ function printDequeue(queue: Queue<any>) {
 //---------------------------------------------------------------------
 // ----------                 MAIN PROGRAM                   ----------
 //---------------------------------------------------------------------
-if (import.meta.main) {
-
+// if (import.meta.main) {
+function main() {
   const ATLA = new Queue<string>();
 
   printPeekQueue(ATLA);

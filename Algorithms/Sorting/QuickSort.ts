@@ -51,7 +51,8 @@ function quickSort(array: number[] | string[], leftBound: number, rightBound: nu
 //---------------------------------------------------------------------
 // ----------                 MAIN PROGRAM                   ----------
 //---------------------------------------------------------------------
-if (import.meta.main) {
+// if (import.meta.main) {
+function main() {  
   const numbers1 = [9, 6, 5, 3, 1, 8, 7, 2, 4];
   const numbers2 = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
   const colors = ["white", "black", "green", "blue", "orange"];
@@ -62,6 +63,8 @@ if (import.meta.main) {
 
   // RUN:   deno run Algorithms/Sorting/QuickSort.ts
 }
+
+main();
 
 // --------------------------- Terminal Output: ---------------------------
 // [

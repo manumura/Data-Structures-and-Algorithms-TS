@@ -1,5 +1,5 @@
-import BNode from './BinaryTreeNode.ts';
-import Queue from '../Sequential/Queue.ts';
+import BNode from './BinaryTreeNode';
+import Queue from '../Sequential/Queue';
 
 
 export default class BinarySearchTree {
@@ -237,8 +237,9 @@ function printNode(tree: BinarySearchTree, value: number): void {
 //---------------------------------------------------------------------
 // ----------                 MAIN PROGRAM                   ----------
 //---------------------------------------------------------------------
-if (import.meta.main) {
-
+// if (import.meta.main) {
+function main() {
+  
   const tree = new BinarySearchTree();
 
   //        9

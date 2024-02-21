@@ -1,4 +1,4 @@
-import Node from './DoublyNode.ts';
+import Node from './DoublyNode';
 
 export default class DoublyLinkedList<T> {
   private head: Node<T> | null;
@@ -115,9 +115,11 @@ export default class DoublyLinkedList<T> {
 
     let currentNode = this.head;
 
-    for (let i=0; !!currentNode; ++i) {
-      if (currentNode.getValue()===value) return i;   // Value matches, so return index
-      currentNode = currentNode.getNext();            // Otherwise, continue searching
+    for (let i=0; currentNode && i < this.length; ++i) {
+      if (currentNode.getValue()===value) {
+        return i; // Value matches, so return index
+      }
+      currentNode = currentNode.getNext(); // Otherwise, continue searching
     }
     return null;
   }
@@ -151,15 +153,24 @@ export default class DoublyLinkedList<T> {
       }
     }
     else {
-      let leader = this._traverseToNode(index-1);
+      // TODO test
+      // let leader = this._traverseToNode(index-1);
 
-      const deletedNode = leader?.getNext();
-      value = deletedNode.getValue();
+      // const deletedNode = leader?.getNext();
+      // value = deletedNode.getValue();
 
-      leader?.setNext(leader.getNext().getNext());
-      leader?.getNext().setPrevious(leader);
-      deletedNode.setNext(null);
-      deletedNode.setPrevious(null);
+      // leader?.setNext(leader.getNext().getNext());
+      // leader?.getNext().setPrevious(leader);
+      // deletedNode.setNext(null);
+      // deletedNode.setPrevious(null);
+
+      const node = this._traverseToNode(index);
+      value = node.getValue();
+
+      node.getPrevious().setNext(node.getNext());
+      node.getNext().setPrevious(node.getPrevious());
+      node.setPrevious(null); 
+      node.setNext(null);
     }
     --this.length;
 
@@ -193,12 +204,8 @@ export default class DoublyLinkedList<T> {
   }
 
   public toString(nodesPerGroup?: number): string {
-    if (this.length === 0 || !this.head) {
-      return "";
-    }
+    nodesPerGroup = nodesPerGroup || 6;
     
-    nodesPerGroup = nodesPerGroup ? nodesPerGroup : 6;
-
     const LABEL_HEAD = 'HEAD';
     const LABEL_TAIL = 'TAIL';
 
@@ -237,7 +244,8 @@ function printGetValueAtIndex(index: number, linkedList: DoublyLinkedList<any>) 
 //---------------------------------------------------------------------
 // ----------                 MAIN PROGRAM                   ----------
 //---------------------------------------------------------------------
-if (import.meta.main) {
+// if (import.meta.main) {
+function main() {
 
   const ATLA = new DoublyLinkedList<string>();
 
@@ -283,7 +291,10 @@ if (import.meta.main) {
   printLinkedList(ATLA);
 
   // RUN: deno run Data-Structures/Linked-Lists/DoublyLinkedList.ts
+  // npx tsx Data-Structures/Linked-Lists/DoublyLinkedList
 }
+
+main();
 
 
 // --------------------------- Terminal Output: ---------------------------
