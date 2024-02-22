@@ -14,6 +14,54 @@ export default class BinarySearchTree {
     return tree;
   }
 
+  public static preTraverse(node: BNode | null) {
+    if(node === null) return;
+
+    const path = new Array();
+    this._preTraverse(node, path);
+    return path;
+  }
+
+  private static _preTraverse(node: BNode | null, path: number[]) {
+    if(node === null) return;
+  
+    path.push(node.getValue());
+    this._preTraverse(node.getLeft(), path);
+    this._preTraverse(node.getRight(), path);
+  }
+
+  public static inOrderTraverse(node: BNode | null) {
+    if(node === null) return;
+
+    const path = new Array();
+    this._inOrderTraverse(node, path);
+    return path;
+  }
+
+  private static _inOrderTraverse(node: BNode | null, path: number[]) {
+    if(node === null) return;
+  
+    this._postTraverse(node.getLeft(), path);
+    path.push(node.getValue());
+    this._postTraverse(node.getRight(), path);
+  }
+
+  public static postTraverse(node: BNode | null): number[] {
+    if(node === null) return [];
+
+    const path = new Array();
+    this._postTraverse(node, path);
+    return path;
+  }
+
+  private static _postTraverse(node: BNode | null, path: number[]): void {
+    if(node === null) return;
+  
+    this._postTraverse(node.getLeft(), path);
+    this._postTraverse(node.getRight(), path);
+    path.push(node.getValue());
+  }
+
   // ------------------- Instance Code Starts Here -------------------
   
   private root: BNode | null;
@@ -64,7 +112,7 @@ export default class BinarySearchTree {
   public lookup(value: number): BNode | null {
     let currentNode: BNode;
 
-    if(!!this.root) {
+    if(this.root) {
       currentNode = this.root;
     } else {
       return null;
@@ -78,14 +126,14 @@ export default class BinarySearchTree {
 
       
       if (value < currentNode.getValue()) {       // Value is smaller than current node
-        if(!!currentNode.getLeft()) {               // If left child exists
+        if(currentNode.getLeft()) {               // If left child exists
           currentNode = currentNode.getLeft();        // Move into left child
           continue;
         }
         return null;                                // Otherwise No left child, value DNE
       }
       else {                                      // Value is greater than current node
-        if(!!currentNode.getRight()) {              // If right child exists
+        if(currentNode.getRight()) {              // If right child exists
           currentNode = currentNode.getRight();       // Move into right child
           continue;
         }
@@ -98,7 +146,7 @@ export default class BinarySearchTree {
     let parentNode: BNode | null;
     let currentNode: BNode;
 
-    if(!!this.root) {
+    if(this.root) {
       currentNode = this.root;
       parentNode = null;
     } else {
@@ -156,7 +204,7 @@ export default class BinarySearchTree {
           // Find the right child's left most child
           let leftmost = currentNode.getRight().getLeft();
           let parentOfLeftmost = currentNode.getRight();
-          while(!!leftmost.getLeft()) {
+          while(leftmost.getLeft()) {
             parentOfLeftmost = leftmost;
             leftmost = leftmost.getLeft();
           }
@@ -261,13 +309,22 @@ function main() {
   printNode(tree, 40);
   printNode(tree, 170);
   console.log('Original Tree: ', JSON.stringify(BinarySearchTree.traverse(tree.getRoot())));
+  console.log('Original Tree preTraverse: ', BinarySearchTree.preTraverse(tree.getRoot()));
+  console.log('Original Tree inOrderTraverse: ', BinarySearchTree.inOrderTraverse(tree.getRoot()));
+  console.log('Original Tree postTraverse: ', BinarySearchTree.postTraverse(tree.getRoot()));
   tree.invertTree();
   console.log('Inverse Tree: ', JSON.stringify(BinarySearchTree.traverse(tree.getRoot())));
+  console.log('Inverse Tree preTraverse: ', BinarySearchTree.preTraverse(tree.getRoot()));
+  console.log('Inverse Tree inOrderTraverse: ', BinarySearchTree.inOrderTraverse(tree.getRoot()));
+  console.log('Inverse Tree postTraverse: ', BinarySearchTree.postTraverse(tree.getRoot()));
 
   console.log(tree.breadthFirstTraversal());
 
   // RUN: deno run Data-Structures/Trees/BinarySearchTree.ts
+  // npx tsx Data-Structures/Trees/BinarySearchTree
 }
+
+main();
 
 // --------------------------- Terminal Output: ---------------------------
 // [
