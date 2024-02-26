@@ -235,7 +235,7 @@ export default class BinarySearchTree {
   }
 
   public invertTree(): boolean {
-    if (!this.root) false;
+    if (!this.root) return false;
     this._invertNode(this.root);
     return true;
   }
