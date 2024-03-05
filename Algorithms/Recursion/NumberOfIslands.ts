@@ -26,10 +26,6 @@ export default class NumberOfIslands {
             return 0;
         }
 
-        // if (grid[current.x][current.y] === '1') {
-        //     return true;
-        // }
-
         // pre
         visited[current.x][current.y] = true;
 
@@ -44,7 +40,6 @@ export default class NumberOfIslands {
     }
 
     public solve(maze: string[][]): number {
-        let numberOfIslands = 0;
         const visited: boolean[][] = [];
         for (let i = 0; i < maze.length; i++) {
             // visited.push([]);
@@ -55,6 +50,7 @@ export default class NumberOfIslands {
             }
         }
 
+        let numberOfIslands = 0;
         for (let i = 0; i < maze.length; i++) {
             for (let j = 0; j < maze[i].length; j++) {
                 const current = new Point(i, j);
