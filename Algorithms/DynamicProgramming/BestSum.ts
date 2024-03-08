@@ -34,7 +34,24 @@ export default class BestSum {
     }
 
     solveTab(target: number, numbers: number[]): number[] {
-        return [];
+        const table = Array(target + 1).fill(null);
+        table[0] = [];
+
+        for (let i = 0; i <= target; i++) {
+            if (table[i] !== null) {
+                for (const number of numbers) {
+                    const combination = [...table[i], number];
+                    // table[i + number] = combination;
+                    // comment below for the first combination found (howSum)
+                    if (!table[i + number] || combination.length < table[i + number].length) {
+                        table[i + number] = combination;
+                    }
+                }
+            }
+
+        }
+
+        return table[target];
     }
 }
 
